@@ -40,12 +40,17 @@ public class Main {
       }
 
       step_loop:
-      while(nBat > 0) {
+      while(nBat > 0 && nMin < 600) {
+        nMin++;
         for(int i=0; i<SIZE; i++) {
           for(int j=0; j<SIZE; j++) {
             if(map[i][j] == 'r') {
               if(nDir == 0) {
-                if(map[i][j+1] == 'x') {
+                if(nearStation(i, j, map) && nBat <= BATT/2) {
+                  nMin += BATT-nBat-1;
+                  nBat = BATT+1;
+                }
+                else if(map[i][j+1] == 'x') {
                   nDir++;
                   nDir%=4;
                 }
@@ -53,9 +58,9 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(nearStation(i, j, map) && nBat <= BATT/2) {
-                  nMin += BATT-nBat;
-                  nBat = BATT;
+                else if(map[i][j+1] == 'p') {
+                  nDir++;
+                  nDir%=4;
                 }
                 else {
                   map[i][j+1] = 'r';
@@ -63,7 +68,11 @@ public class Main {
                 }
               }
               else if(nDir == 1) {
-                if(map[i+1][j] == 'x') {
+                if(nearStation(i, j, map) && nBat <= BATT/2) {
+                  nMin += BATT-nBat-1;
+                  nBat = BATT+1;
+                }
+                else if(map[i+1][j] == 'x') {
                   nDir++;
                   nDir%=4;
                 }
@@ -71,9 +80,9 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(nearStation(i, j, map) && nBat <= BATT/2) {
-                  nMin += BATT-nBat;
-                  nBat = BATT;
+                else if(map[i+1][j] == 'p') {
+                  nDir++;
+                  nDir%=4;
                 }
                 else {
                   map[i+1][j] = 'r';
@@ -81,7 +90,11 @@ public class Main {
                 }
               }
               else if(nDir == 2) {
-                if(map[i][j-1] == 'x') {
+                if(nearStation(i, j, map) && nBat <= BATT/2) {
+                  nMin += BATT-nBat-1;
+                  nBat = BATT+1;
+                }
+                else if(map[i][j-1] == 'x') {
                   nDir++;
                   nDir%=4;
                 }
@@ -89,9 +102,9 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(nearStation(i, j, map) && nBat <= BATT/2) {
-                  nMin += BATT-nBat;
-                  nBat = BATT;
+                else if(map[i][j-1] == 'p') {
+                  nDir++;
+                  nDir%=4;
                 }
                 else {
                   map[i][j-1] = 'r';
@@ -99,7 +112,11 @@ public class Main {
                 }
               }
               else if(nDir == 3) {
-                if(map[i-1][j] == 'x') {
+                if(nearStation(i, j, map) && nBat <= BATT/2) {
+                  nMin += BATT-nBat-1;
+                  nBat = BATT+1;
+                }
+                else if(map[i-1][j] == 'x') {
                   nDir++;
                   nDir%=4;
                 }
@@ -107,17 +124,25 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(nearStation(i, j, map) && nBat <= BATT/2) {
-                  nMin += BATT-nBat;
-                  nBat = BATT;
+                else if(map[i-1][j] == 'p') {
+                  nDir++;
+                  nDir%=4;
                 }
                 else {
                   map[i-1][j] = 'r';
                   map[i][j] = '-';
                 }
               }
-              nMin++;
               nBat--;
+              if(nCase == 32){
+              System.err.println("\n\n"+nDir+" "+nBat+"/"+BATT+" "+nMin);
+              for(int k=0; k<SIZE; k++) {
+                for(int l=0; l<SIZE; l++) {
+                  System.err.print(map[k][l]);
+                }
+                System.err.println();
+              }
+              }
               continue step_loop;
             }
           }
