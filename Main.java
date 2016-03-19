@@ -27,6 +27,7 @@ public class Main {
         map[i] = scan.nextLine().toCharArray();
       }
 
+      step_loop:
       while(nBat > 0) {
         nMin++;
         nBat--;
@@ -42,7 +43,7 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(map[i][j+1] == 'p') {
+                else if(map[i][j+1] == 'p' && nBat <= BATT/2) {
                   nMin += BATT-nBat;
                   nBat = BATT;
                 }
@@ -60,7 +61,7 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(map[i+1][j] == 'p') {
+                else if(map[i+1][j] == 'p' && nBat <= BATT/2) {
                   nMin += BATT-nBat;
                   nBat = BATT;
                 }
@@ -78,7 +79,7 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(map[i][j-1] == 'p') {
+                else if(map[i][j-1] == 'p' && nBat <= BATT/2) {
                   nMin += BATT-nBat;
                   nBat = BATT;
                 }
@@ -96,7 +97,7 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(map[i-1][j] == 'p') {
+                else if(map[i-1][j] == 'p' && nBat <= BATT/2) {
                   nMin += BATT-nBat;
                   nBat = BATT;
                 }
@@ -105,6 +106,7 @@ public class Main {
                   map[i][j] = '-';
                 }
               }
+              continue step_loop;
             }
           }
         }
