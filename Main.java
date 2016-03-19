@@ -29,17 +29,22 @@ public class Main {
 
       while(nBat > 0) {
         nMin++;
+        nBat--;
         for(int i=0; i<SIZE; i++) {
           for(int j=0; j<SIZE; j++) {
             if(map[i][j] == 'r') {
               if(nDir == 0) {
                 if(map[i][j+1] == 'x') {
-                  dir++;
-                  dir%=4;
+                  nDir++;
+                  nDir%=4;
                 }
                 else if(map[i][j+1] == 'm') {
                   System.out.println(nMin);
                   continue case_loop;
+                }
+                else if(map[i][j+1] == 'p') {
+                  nMin += BATT-nBat;
+                  nBat = BATT;
                 }
                 else {
                   map[i][j+1] = 'r';
@@ -48,12 +53,16 @@ public class Main {
               }
               if(nDir == 1) {
                 if(map[i+1][j] == 'x') {
-                  dir++;
-                  dir%=4;
+                  nDir++;
+                  nDir%=4;
                 }
                 else if(map[i+1][j] == 'm') {
                   System.out.println(nMin);
                   continue case_loop;
+                }
+                else if(map[i+1][j] == 'p') {
+                  nMin += BATT-nBat;
+                  nBat = BATT;
                 }
                 else {
                   map[i+1][j] = 'r';
@@ -62,12 +71,16 @@ public class Main {
               }
               if(nDir == 2) {
                 if(map[i][j-1] == 'x') {
-                  dir++;
-                  dir%=4;
+                  nDir++;
+                  nDir%=4;
                 }
                 else if(map[i][j-1] == 'm') {
                   System.out.println(nMin);
                   continue case_loop;
+                }
+                else if(map[i][j-1] == 'p') {
+                  nMin += BATT-nBat;
+                  nBat = BATT;
                 }
                 else {
                   map[i][j-1] = 'r';
@@ -76,12 +89,16 @@ public class Main {
               }
               if(nDir == 0) {
                 if(map[i-1][j] == 'x') {
-                  dir++;
-                  dir%=4;
+                  nDir++;
+                  nDir%=4;
                 }
                 else if(map[i-1][j] == 'm') {
                   System.out.println(nMin);
                   continue case_loop;
+                }
+                else if(map[i-][j] == 'p') {
+                  nMin += BATT-nBat;
+                  nBat = BATT;
                 }
                 else {
                   map[i-1][j] = 'r';
