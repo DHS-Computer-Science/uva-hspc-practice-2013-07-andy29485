@@ -51,7 +51,7 @@ public class Main {
                   map[i][j] = '-';
                 }
               }
-              if(nDir == 1) {
+              else if(nDir == 1) {
                 if(map[i+1][j] == 'x') {
                   nDir++;
                   nDir%=4;
@@ -69,7 +69,7 @@ public class Main {
                   map[i][j] = '-';
                 }
               }
-              if(nDir == 2) {
+              else if(nDir == 2) {
                 if(map[i][j-1] == 'x') {
                   nDir++;
                   nDir%=4;
@@ -87,7 +87,7 @@ public class Main {
                   map[i][j] = '-';
                 }
               }
-              if(nDir == 0) {
+              else if(nDir == 3) {
                 if(map[i-1][j] == 'x') {
                   nDir++;
                   nDir%=4;
@@ -96,7 +96,7 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(map[i-][j] == 'p') {
+                else if(map[i-1][j] == 'p') {
                   nMin += BATT-nBat;
                   nBat = BATT;
                 }
