@@ -5,6 +5,18 @@
 import java.util.*;
 
 public class Main {
+  public static boolean nearStation(int a, int b, char[][] map) {
+    if(map[a][b+1] == 'p')
+      return true;
+    if(map[a][b-1] == 'p')
+      return true;
+    if(map[a+1][b] == 'p')
+      return true;
+    if(map[a-1][b] == 'p')
+      return true;
+    return false;
+  }
+
   public static void main(String[] args) {
     Scanner scan = new Scanner(System.in);
 
@@ -29,8 +41,6 @@ public class Main {
 
       step_loop:
       while(nBat > 0) {
-        nMin++;
-        nBat--;
         for(int i=0; i<SIZE; i++) {
           for(int j=0; j<SIZE; j++) {
             if(map[i][j] == 'r') {
@@ -43,7 +53,7 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(map[i][j+1] == 'p' && nBat <= BATT/2) {
+                else if(nearStation(i, j, map) && nBat <= BATT/2) {
                   nMin += BATT-nBat;
                   nBat = BATT;
                 }
@@ -61,7 +71,7 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(map[i+1][j] == 'p' && nBat <= BATT/2) {
+                else if(nearStation(i, j, map) && nBat <= BATT/2) {
                   nMin += BATT-nBat;
                   nBat = BATT;
                 }
@@ -79,7 +89,7 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(map[i][j-1] == 'p' && nBat <= BATT/2) {
+                else if(nearStation(i, j, map) && nBat <= BATT/2) {
                   nMin += BATT-nBat;
                   nBat = BATT;
                 }
@@ -97,7 +107,7 @@ public class Main {
                   System.out.println(nMin);
                   continue case_loop;
                 }
-                else if(map[i-1][j] == 'p' && nBat <= BATT/2) {
+                else if(nearStation(i, j, map) && nBat <= BATT/2) {
                   nMin += BATT-nBat;
                   nBat = BATT;
                 }
@@ -106,6 +116,8 @@ public class Main {
                   map[i][j] = '-';
                 }
               }
+              nMin++;
+              nBat--;
               continue step_loop;
             }
           }
